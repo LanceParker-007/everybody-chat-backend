@@ -5,6 +5,7 @@ import { connectDB } from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import chatRoutes from "./routes/chatRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
+import cors from "cors";
 
 config({
   path: "./backend/config/config.env",
@@ -13,6 +14,7 @@ config({
 connectDB();
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express({ urlencoded: true }));
 
