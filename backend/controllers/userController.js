@@ -63,15 +63,17 @@ export const authUser = asyncHandler(async (req, res) => {
 
 //Get all users
 export const allUsers = asyncHandler(async (req, res, next) => {
-  const keyword = req.query.keyword
+  const keyword = req.query.search
     ? {
         $or: [
-          { name: { $regex: req.query.keyword, $options: "i" } },
-          { email: { $regex: req.query.keyword, $options: "i" } },
+          { name: { $regex: req.query.search, $options: "i" } },
+          { email: { $regex: req.query.search, $options: "i" } },
         ],
       }
     : {};
 
-  const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+  const users = await User.find(keyword).find({
+    _id: { $ne: req.user._id },
+  });
   res.send(users);
 });
