@@ -1,5 +1,5 @@
 import express from "express";
-import { sendMessage } from "../controllers/messageController.js";
+import { allMessages, sendMessage } from "../controllers/messageController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
@@ -8,6 +8,6 @@ const router = express.Router();
 router.route("/").post(protect, sendMessage);
 
 //Fetch all messages of one single chat
-// router.route("/:chatId").get(protect, allMessages);
+router.route("/:chatId").get(protect, allMessages);
 
 export default router;

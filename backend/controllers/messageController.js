@@ -39,3 +39,16 @@ export const sendMessage = asyncHandler(async (req, res) => {
     throw new Error(error.message);
   }
 });
+
+export const allMessages = asyncHandler(async (req, res) => {
+  try {
+    const messages = await Message.find({ chat: req.params.chatId })
+      .populate("sender", "name pic email")
+      .populate("chat");
+
+    res.json(messages);
+  } catch (error) {
+    res.status(400);
+    throw new Error(error.message);
+  }
+});
