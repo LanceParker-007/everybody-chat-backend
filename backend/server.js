@@ -4,6 +4,7 @@ import { config } from "dotenv";
 import { connectDB } from "./config/db.js";
 import userRoutes from "./routes/userRoutes.js";
 import chatRoutes from "./routes/chatRoutes.js";
+import messageRoutes from "./routes/messageRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 import cors from "cors";
 
@@ -27,6 +28,9 @@ app.use("/api/user", userRoutes);
 
 //Chat Routes
 app.use("/api/chat", chatRoutes);
+
+//Message Routes
+app.use("/api/message", messageRoutes);
 
 // Other Routes
 app.use(notFound);
